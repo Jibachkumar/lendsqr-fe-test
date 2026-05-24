@@ -1,0 +1,97 @@
+// ─── Typography
+// Figma uses "SF Pro Display". Since it cannot be served via CDN,
+// we self-host it (see global.scss @font-face) with a system-font
+// fallback chain that renders identically on macOS (which already
+// has SF Pro installed) and closely on other platforms.
+$font-family:
+  "SF Pro Display",
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  "Helvetica Neue",
+  Arial,
+  sans-serif;
+
+// ─── Colors
+$primary: #39cdcc;
+$primary-dark: #fcfdfe;
+$secondary: #2d3748;
+$accent: #e9b200;
+
+$white: #ffffff;
+$black: #000000;
+$text-primary: #213f7d;
+$text-secondary: #545f7d;
+$text-muted: #8b9bb4;
+$border-color: rgba(84, 95, 125, 0.14);
+$bg-light: #fcfcfc;
+$bg-sidebar: #ffffff;
+
+// ─── Status colors
+$status-active-bg: rgba(57, 205, 98, 0.06);
+$status-inactive: #545f7d;
+$status-inactive-bg: rgba(84, 95, 125, 0.06);
+$status-pending: #e9b200;
+$status-pending-bg: rgba(233, 178, 0, 0.06);
+$status-blacklisted: #e4033b;
+$status-blacklisted-bg: rgba(228, 3, 59, 0.06);
+
+// ─── Layout
+$sidebar-width: 283px;
+$header-height: 100px;
+
+// ─── Shadows
+$card-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+$dropdown-shadow: 3px 5px 20px rgba(0, 0, 0, 0.1);
+
+// ─── Breakpoints
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+$wide: 1200px;
+
+// ─── Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin card {
+  background: $white;
+  border-radius: 4px;
+  box-shadow: $card-shadow;
+}
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: #{$mobile}) {
+      @content;
+    }
+  } @else if $breakpoint == tablet {
+    @media (max-width: #{$tablet}) {
+      @content;
+    }
+  } @else if $breakpoint == desktop {
+    @media (max-width: #{$desktop}) {
+      @content;
+    }
+  }
+}
+
+@mixin status-badge($color, $bg) {
+  color: $color;
+  background: $bg;
+  border-radius: 100px;
+  padding: 7px 16px;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: capitalize;
+  display: inline-block;
+}
