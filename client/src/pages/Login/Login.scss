@@ -1,4 +1,4 @@
-@use "../styles/base" as *;
+@use "../../styles/base" as *;
 
 .login-page {
   display: flex;
@@ -29,16 +29,15 @@
     align-self: flex-start;
     padding-left: 97px;
 
-    img {
+    &__img {
       width: 24px;
       height: 22px;
     }
 
-    span {
-      display: relative;
-      font-size: 35px;
-      font-weight: 700;
-      color: $text-primary;
+    &__img-logo {
+      width: 138px;
+      height: 36px;
+      padding-top: 5px;
     }
   }
 
@@ -140,6 +139,9 @@
 
     &::placeholder {
       color: rgba($text-secondary, 0.7);
+      font-size: 14px;
+      line-height: 100%;
+      letter-spacing: 0%;
     }
   }
 
@@ -152,7 +154,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    size: 12px;
+    font-size: 12px;
     font-weight: 600;
     line-height: 100%;
     letter-spacing: 10%;
@@ -201,7 +203,7 @@
     margin-top: 8px;
 
     &:hover {
-      background: darken($primary, 5%);
+      background: $primary;
     }
 
     &:active {

@@ -1,0 +1,23 @@
+@use "../../styles/base" as *;
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background: $bg-light;
+
+  &__content {
+    margin-left: $sidebar-width;
+    margin-top: $header-height;
+    flex: 1;
+    min-width: 0;
+    padding: 60px 60px;
+
+    @include respond-to(desktop) {
+      margin-left: 0;
+    }
+
+    @include respond-to(mobile) {
+      padding: 24px 16px;
+    }
+  }
+}

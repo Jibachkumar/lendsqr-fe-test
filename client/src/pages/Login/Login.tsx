@@ -14,10 +14,15 @@ function Login() {
       <div className="login-page__left">
         <div className="login-page__logo">
           <img
+            className="login-page__logo__img"
             src="https://res.cloudinary.com/dhadohg2h/image/upload/v1779646509/Union_uagkkv.png"
             alt="Lendsqr"
           />
-          <span>lendsqr</span>
+          <img
+            className="login-page__logo__img-logo"
+            src="https://res.cloudinary.com/dhadohg2h/image/upload/v1779699309/lendsqr_kqyl0k.png"
+            alt="logo"
+          />
         </div>
         <div className="login-page__illustration">
           <img
