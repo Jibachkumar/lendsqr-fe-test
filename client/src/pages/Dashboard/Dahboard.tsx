@@ -1,76 +1,112 @@
-interface StatusCardProps {
-  icon: React.ReactNode;
-  iconBg: string;
-  label: string;
-  value: string | number;
-}
-const StatusCard = ({ icon, iconBg, label, value }: StatusCardProps) => (
-  <div className="stat-card">
-    <div className="stat-card__icon" style={{ background: iconBg }}>
-      {icon}
-    </div>
-    <p className="stat-card__label">{label}</p>
-    <p className="stat-card__value">{value}</p>
-  </div>
-);
+import { useState } from "react";
+import { useUsers } from "../../hooks/useUser.ts";
+import DahboardStatusCard from "../../components/DashboardStatusCard/DashboardStatusCard";
+import "./Dashboard.scss";
+import Pangiation from "../../components/Pangiation/Pangiation";
+
+const COLS = [
+  { key: "orgName", label: "Organization" },
+  { key: "userName", label: "Username" },
+  { key: "email", label: "Email" },
+  { key: "phoneNumber", label: "Phone Number" },
+  { key: "createdAt", label: "Date Joined" },
+  { key: "status", label: "Status" },
+];
+
+const fmtDate = (s: string) => {
+  return new Date(s).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
 
 function Dahboard() {
-  return (
-    <div className="dashboard">
-      <h1 className="dashboard__title">Users</h1>
+  const { users, loading, error } = useUsers();
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
 
-      <div className="dashboard__stats">
-        <StatusCard
-          iconBg="rgba(223, 24, 255, 0.1)"
-          icon={
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path
-                d="M11 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 0114 0H4z"
-                fill="#DF18FF"
-              />
-            </svg>
-          }
-          label="Users"
-          value={1}
-        />
-        <StatusCard
-          iconBg="rgba(87, 24, 255, 0.1)"
-          icon={
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path
-                d="M11 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 0114 0H4z"
-                fill="#5718FF"
-              />
-            </svg>
-          }
-          label="Active Users"
-          value={1}
-        />
-        <StatusCard
-          iconBg="rgba(245, 163, 19, 0.1)"
-          icon={
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path
-                d="M2 6a2 2 0 012-2h12a2 2 0 012 2v2H2V6zm0 4h16v6a2 2 0 01-2 2H4a2 2 0 01-2-2v-6z"
-                fill="#F5A313"
-              />
-            </svg>
-          }
-          label="Users with Loans"
-          value={1}
-        />
-        <StatusCard
-          iconBg="rgba(255, 51, 102, 0.1)"
-          icon={
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path
-                d="M4 4a2 2 0 00-2 2v10a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h14v2H4V6zm0 4h14v6H4v-6z"
-                fill="#FF3366"
-              />
-            </svg>
-          }
-          label="Users with Savings"
-          value={1}
+  const filtered = users.map((user) => ({
+    organization: user.organization,
+    username: user.username,
+    email: user.email,
+    phoneNumber: user.phoneNumber,
+    dateJoined: user.dateJoined,
+    status: user.status,
+  }));
+
+  const totalPages = Math.ceil(filtered.length / perPage);
+  const rows = filtered.slice((page - 1) * perPage, page * perPage);
+
+  return (
+    <div>
+      <DahboardStatusCard />
+
+      <div className="table-card">
+        {loading && <p className="empty-stat">Loading....</p>}
+        {error && <p className="error-state">{error}</p>}
+
+        <div className="users-table-wrap">
+          <table className="users-table">
+            <thead>
+              <tr>
+                {COLS.map((col) => (
+                  <th key={col.key}>
+                    <span className="th-inner">
+                      {col.label}
+                      {/* filter funnel icon */}
+                      <img
+                        src="https://res.cloudinary.com/dhadohg2h/image/upload/v1779826860/filter-results-button_vcuuyg.png"
+                        alt=""
+                      />
+                    </span>
+                  </th>
+                ))}
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {rows.length === 0 ? (
+                <tr>
+                  <td colSpan={6}>
+                    <div className="empty-state">No users found.</div>
+                  </td>
+                </tr>
+              ) : (
+                rows.map((u, i) => (
+                  <tr key={i}>
+                    <td>{u.organization}</td>
+                    <td> {u.username}</td>
+                    <td>{u.email} </td>
+                    <td> {u.phoneNumber} </td>
+                    <td> {fmtDate(u.dateJoined)} </td>
+                    <td>
+                      <span
+                        className={`badge badge--${(u.status || "inactive").toLowerCase()}`}
+                      >
+                        {u.status}
+                      </span>
+                    </td>
+                    <td>⋮</td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        <Pangiation
+          currentPage={page}
+          totalPages={totalPages}
+          totalItems={filtered.length}
+          perPage={perPage}
+          onPageChange={setPage}
+          onPerPageChange={(n) => {
+            setPerPage(n);
+            setPage(1);
+          }}
         />
       </div>
     </div>

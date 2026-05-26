@@ -1,0 +1,120 @@
+@use "../../styles/base" as *;
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-top: 1px solid $border-color;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  @media (max-width: 500px) {
+    flex-direction: row;
+    padding: 18px 10px;
+  }
+
+  /* left side: "Showing 100 out of 100" */
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: $text-secondary;
+  }
+
+  &__select-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__per-page-select {
+    appearance: none;
+    background: rgba(33, 63, 125, 0.1);
+    border: none;
+    border-radius: 4px;
+    padding: 4px 24px 4px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: $text-primary;
+    cursor: pointer;
+    outline: none;
+    line-height: 1.4;
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba($primary, 0.3);
+    }
+  }
+
+  &__select-arrow {
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: $text-primary;
+    font-size: 10px;
+  }
+
+  /* right side: page buttons */
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__nav-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(33, 63, 125, 0.1);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-primary;
+    font-size: 16px;
+    transition: background 0.15s;
+
+    &:hover:not(:disabled) {
+      background: rgba(33, 63, 125, 0.2);
+    }
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  &__page-btn {
+    min-width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    border: none;
+    background: none;
+    font-size: 14px;
+    color: $text-secondary;
+    cursor: pointer;
+    padding: 0 4px;
+    transition: all 0.15s;
+
+    &:hover {
+      color: $text-primary;
+    }
+
+    &--active {
+      color: $text-primary;
+      font-weight: 600;
+    }
+  }
+
+  &__ellipsis {
+    font-size: 14px;
+    color: $text-muted;
+    padding: 0 2px;
+    display: flex;
+    align-items: center;
+    height: 28px;
+  }
+}

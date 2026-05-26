@@ -1,0 +1,76 @@
+@use "../../styles/base" as *;
+
+.dashboard {
+  &__title {
+    font-size: 24px;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: 26px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    font-family: sans-serif;
+
+    @include respond-to(tablet) {
+      font-size: 18px;
+    }
+  }
+
+  &__stats {
+    display: grid;
+    height: 160px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+
+    @include respond-to(tablet) {
+      grid-template-columns: repeat(2, 1fr);
+      margin-bottom: 210px;
+    }
+  }
+}
+
+.stat-card {
+  padding: 30px;
+  border-radius: 1px solid $border-color;
+  background: $white;
+  box-shadow: $card-shadow;
+
+  &__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    @include flex-center;
+    margin-bottom: 14px;
+  }
+
+  &__label {
+    font-size: 14px;
+    font-weight: 500;
+    color: $text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0%;
+    line-height: 100%;
+    font-family: sans-serif;
+    margin-bottom: 14px;
+
+    @include respond-to(tablet) {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 0;
+    }
+  }
+
+  &__value {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 100%;
+    letter-spacing: 0%;
+    font-family: sans-serif;
+    color: $text-primary;
+
+    @include respond-to(tablet) {
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+}

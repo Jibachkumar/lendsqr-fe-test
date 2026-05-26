@@ -1,54 +1,293 @@
-@use "../../styles/variables" as *;
+@use "../../styles/base" as *;
 
-.dashboard {
-  &__title {
-    font-size: 24px;
-    font-weight: 600;
-    color: $text-primary;
-    margin-bottom: 26px;
-  }
+.table-card {
+  background: $white;
+  border-radius: 4px;
+  box-shadow: $card-shadow;
+  overflow: hidden;
+}
 
-  &__stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 26px;
-    margin-bottom: 40px;
+.users-table-wrap {
+  overflow-x: auto;
+  padding: 0 28px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 
-    @include respond-to(desktop) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @include respond-to(mobile) {
-      grid-template-columns: 1fr;
-    }
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
-.stat-card {
-  @include card;
-  padding: 30px;
-  border-radius: 4px;
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 820px;
 
-  &__icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    @include flex-center;
-    margin-bottom: 14px;
+  th {
+    padding: 18px 0;
+    text-align: left;
+    white-space: nowrap;
+    position: relative;
+    background: $white;
   }
 
-  &__label {
+  .th-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     font-size: 12px;
     font-weight: 600;
     color: $text-secondary;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 14px;
+    font-family: sans-serif;
+    letter-spacing: 0%;
+    line-height: 100%;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: bottom;
+
+    &:hover {
+      color: $text-primary;
+    }
+
+    @include respond-to(tablet) {
+      font-size: 10px;
+      gap: 8px;
+
+      img {
+        width: 12px;
+        height: 12px;
+      }
+    }
   }
 
-  &__value {
-    font-size: 24px;
-    font-weight: 600;
-    color: $text-primary;
+  td {
+    padding: 16px 0;
+    font-size: 14px;
+    color: $text-secondary;
+    white-space: nowrap;
+    font-weight: 400;
+    letter-spacing: 0px;
+    line-height: 100%;
+    font-family: sans-serif;
+    opacity: 0.9;
+    vertical-align: middle;
+    border-bottom: 1px solid $border-color;
+
+    @include respond-to(tablet) {
+      font-size: 11px;
+    }
   }
+
+  tbody tr:last-child {
+    border-bottom: none;
+  }
+  tbody tr:hover {
+    background: rgba($primary, 0.015);
+    cursor: pointer;
+  }
+}
+
+/* ─── Status badges — exact Figma match ─── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 400;
+  text-transform: capitalize;
+  white-space: nowrap;
+
+  /* Active — green text, light green bg */
+  &--active {
+    color: #39cd62;
+    background: rgba(57, 205, 98, 0.06);
+  }
+
+  /* Inactive — grey text, light grey bg */
+  &--inactive {
+    color: #545f7d;
+    background: rgba(84, 95, 125, 0.06);
+  }
+
+  /* Pending — amber text, light amber bg */
+  &--pending {
+    color: #e9b200;
+    background: rgba(233, 178, 0, 0.06);
+  }
+
+  /* Blacklisted — red text, light red bg */
+  &--blacklisted {
+    color: #e4033b;
+    background: rgba(228, 3, 59, 0.06);
+  }
+}
+
+/* ─── Three-dot action menu ─── */
+.action-cell {
+  position: relative;
+}
+
+.dots-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 10px;
+  font-size: 20px;
+  line-height: 1;
+  color: $text-muted;
+  border-radius: 4px;
+  transition: background 0.15s;
+
+  &:hover {
+    background: rgba($border-color, 2);
+    color: $text-secondary;
+  }
+}
+
+.action-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 2px);
+  background: $white;
+  border-radius: 4px;
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.14);
+  border: 1px solid rgba(84, 95, 125, 0.08);
+  min-width: 190px;
+  z-index: 400;
+  overflow: hidden;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    font-size: 14px;
+    color: $text-secondary;
+    cursor: pointer;
+    transition: background 0.12s;
+    white-space: nowrap;
+
+    &:hover {
+      background: rgba($primary, 0.05);
+      color: $text-primary;
+    }
+  }
+}
+
+/* ─── Filter popup ─── */
+.filter-popup {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: $white;
+  border-radius: 4px;
+  padding: 20px;
+  width: 260px;
+  z-index: 500;
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.14);
+  border: 1px solid rgba(84, 95, 125, 0.08);
+
+  &__field {
+    margin-bottom: 14px;
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: $text-secondary;
+      margin-bottom: 6px;
+    }
+  }
+
+  &__select-wrap {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid $text-muted;
+      pointer-events: none;
+    }
+  }
+
+  &__input,
+  &__select {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    font-size: 14px;
+    color: $text-primary;
+    background: $white;
+    outline: none;
+    appearance: none;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: $primary;
+    }
+    &::placeholder {
+      color: rgba($text-secondary, 0.5);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  &__reset {
+    flex: 1;
+    height: 40px;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    background: $white;
+    font-size: 14px;
+    font-weight: 600;
+    color: $text-secondary;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    &:hover {
+      border-color: $text-secondary;
+    }
+  }
+
+  &__apply {
+    flex: 1;
+    height: 40px;
+    background: $primary;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: $white;
+    cursor: pointer;
+    transition: background 0.2s;
+    &:hover {
+      background: #2eb8b7;
+    }
+  }
+}
+
+/* ─── Empty / Error ─── */
+.empty-state,
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 12px;
+  color: $text-muted;
+  font-size: 15px;
+  text-align: center;
 }
