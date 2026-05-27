@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login/Login.tsx";
 import DashboardLayout from "./components/DashboardLayoutWrapper/DashboardLayout.tsx";
 import Dashboard from "./pages/Dashboard/Dahboard";
+import UserShowingFilter from "./pages/UserShowingFilter/UserShowingFilter.tsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
+      },
+      {
+        path: "users",
+        element: <UserShowingFilter />,
       },
     ],
   },

@@ -1,0 +1,176 @@
+@use "../../styles/base" as *;
+
+.users-table-wrap {
+  position: relative;
+  padding: 0 28px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  background: $white;
+  border-radius: 4px;
+  box-shadow: $card-shadow;
+
+  @include respond-to(tablet) {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: separate;
+  min-width: 820px;
+
+  th {
+    padding: 18px 0;
+    text-align: left;
+    white-space: nowrap;
+    position: relative;
+    background: $white;
+  }
+
+  .th-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: $text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0%;
+    line-height: 100%;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: bottom;
+
+    &:hover {
+      color: $text-primary;
+    }
+
+    @include respond-to(tablet) {
+      font-size: 10px;
+      gap: 8px;
+
+      img {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+
+  td {
+    padding: 16px 0;
+    font-size: 14px;
+    color: $text-secondary;
+    white-space: nowrap;
+    font-weight: 400;
+    letter-spacing: 0px;
+    line-height: 100%;
+    opacity: 0.9;
+    vertical-align: middle;
+    border-bottom: 1px solid $border-color;
+
+    @include respond-to(tablet) {
+      font-size: 12.5px;
+    }
+  }
+
+  td:last-child {
+    font-size: 19.5px;
+    font-weight: 600;
+
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  tbody tr:hover {
+    background: rgba($primary, 0.015);
+    cursor: pointer;
+  }
+}
+
+/* ─── Status badges — exact Figma match ─── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 400;
+  text-transform: capitalize;
+  white-space: nowrap;
+
+  /* Active — green text, light green bg */
+  &--active {
+    color: #39cd62;
+    background: rgba(57, 205, 98, 0.06);
+  }
+
+  /* Inactive — grey text, light grey bg */
+  &--inactive {
+    color: #545f7d;
+    background: rgba(84, 95, 125, 0.06);
+  }
+
+  /* Pending — amber text, light amber bg */
+  &--pending {
+    color: #e9b200;
+    background: rgba(233, 178, 0, 0.06);
+  }
+
+  /* Blacklisted — red text, light red bg */
+  &--blacklisted {
+    color: #e4033b;
+    background: rgba(228, 3, 59, 0.06);
+  }
+}
+
+/* ─── Empty / Error ─── */
+.empty-state,
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 12px;
+  color: $text-muted;
+  font-size: 15px;
+  text-align: center;
+}
+
+.action-cell {
+  position: relative;
+  z-index: 10;
+}
+
+.action-cell.active {
+  z-index: 9999;
+}
+
+.action-card {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: -40px;
+  width: 180px;
+  background: $white;
+  border-radius: 4px;
+  border: 1px;
+  padding: 18px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 999;
+  @include respond-to(tablet) {
+    right: -20px;
+  }
+}
