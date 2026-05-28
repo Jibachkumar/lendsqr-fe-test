@@ -9,21 +9,35 @@ interface PaginationProps {
   onPerPageChange: (n: number) => void;
 }
 
-const PER_PAGE_OPTIONS = [10, 20, 50, 100];
+const PER_PAGE_OPTIONS = [9, 20, 50, 100];
 
 const getPages = (current: number, total: number): (number | "...")[] => {
   if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
-  const pages: (number | "...")[] = [1];
-  if (current > 3) pages.push("...");
-  for (
-    let i = Math.max(2, current - 1);
-    i <= Math.min(total - 1, current + 1);
-    i++
-  )
-    pages.push(i);
-  if (current < total - 2) pages.push("...");
-  pages.push(total);
-  return pages;
+
+  const pages: (number | "...")[] = [];
+
+  pages.push(1, 2, 3);
+
+  // Ellipsis after first 3 if needed
+  if (current > 5) pages.push("...");
+
+  // Middle pages (when current is far from start and end)
+  if (current > 4 && current < total - 3) {
+    pages.push(current - 1, current, current + 1);
+    pages.push("...");
+  } else if (current <= 4) {
+    // Near start — no middle needed, just ellipsis before last 2
+    pages.push("...");
+  } else {
+    // Near end
+    pages.push("...");
+  }
+
+  // Always show last 2
+  pages.push(total - 1, total);
+
+  // Remove duplicates while preserving order
+  return pages.filter((p, i, arr) => arr.indexOf(p) === i);
 };
 
 function Pangiation({
@@ -53,7 +67,7 @@ function Pangiation({
               </option>
             ))}
           </select>
-          <span className="pagination__select-arrow">▾</span>
+          <span className="pagination__select-arrow">˅</span>
         </div>
         out of {totalItems.toLocaleString()}
       </div>
@@ -64,9 +78,8 @@ function Pangiation({
           className="pagination__nav-btn"
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          aria-label="Previous page"
         >
-          ‹
+          ❮
         </button>
 
         {pages.map((p, i) =>
@@ -79,7 +92,6 @@ function Pangiation({
               key={p}
               className={`pagination__page-btn${p === currentPage ? " pagination__page-btn--active" : ""}`}
               onClick={() => onPageChange(p)}
-              aria-label={`Page ${p}`}
               aria-current={p === currentPage ? "page" : undefined}
             >
               {p}
@@ -91,9 +103,8 @@ function Pangiation({
           className="pagination__nav-btn"
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          aria-label="Next page"
         >
-          ›
+          ❯
         </button>
       </div>
     </div>

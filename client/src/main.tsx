@@ -6,6 +6,7 @@ import Login from "./pages/Login/Login.tsx";
 import DashboardLayout from "./components/DashboardLayoutWrapper/DashboardLayout.tsx";
 import Dashboard from "./pages/Dashboard/Dahboard";
 import UserShowingFilter from "./pages/UserShowingFilter/UserShowingFilter.tsx";
+import UserDetails from "./pages/UserDetails/UserDetails.tsx";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "users",
         element: <UserShowingFilter />,
+      },
+      {
+        path: "users/:id",
+        element: <UserDetails />,
       },
     ],
   },

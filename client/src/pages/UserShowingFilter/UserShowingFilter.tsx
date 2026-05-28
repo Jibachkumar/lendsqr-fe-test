@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { useUsers } from "../../hooks/useUser.ts";
 import DahboardStatusCard from "../../components/DashboardStatusCard/DashboardStatusCard";
 import UserListTable from "../../components/UserListTable/UserListTable";
+import Pangiation from "../../components/Pangiation/Pangiation";
 import "./UserShowingFilter.scss";
 
 function UserShowingFilter() {
   const { users, loading, error } = useUsers();
+
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(9);
 
   const filtered = users.map((user) => ({
     email: user.email,
@@ -13,7 +18,9 @@ function UserShowingFilter() {
     status: user.status,
   }));
 
-  const rows = filtered.slice(0, 9);
+  const totalPages = Math.ceil(filtered.length / perPage);
+
+  const rows = filtered.slice((page - 1) * perPage, page * perPage);
 
   return (
     <div>
@@ -56,6 +63,10 @@ function UserShowingFilter() {
           <div className="filter-modal__field">
             <label>Date</label>
             <input className="filter-modal__input" placeholder="Date" />
+            <img
+              src="https://res.cloudinary.com/dhadohg2h/image/upload/v1779993852/np_calendar_2080577_000000_1_yb7eaz.png"
+              alt="calenderLogo"
+            />
           </div>
 
           <div className="filter-modal__field">
@@ -82,6 +93,18 @@ function UserShowingFilter() {
           </div>
         </div>
       </UserListTable>
+
+      <Pangiation
+        currentPage={page}
+        totalPages={totalPages}
+        totalItems={filtered.length}
+        perPage={perPage}
+        onPageChange={setPage}
+        onPerPageChange={(n) => {
+          setPerPage(n);
+          setPage(1);
+        }}
+      />
     </div>
   );
 }

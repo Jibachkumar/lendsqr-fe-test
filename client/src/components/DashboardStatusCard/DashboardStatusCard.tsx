@@ -47,12 +47,10 @@ function DahboardStatusCard() {
         <StatusCard
           iconBg="rgba(223, 24, 255, 0.1)"
           icon={
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path
-                d="M11 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 0114 0H4z"
-                fill="#DF18FF"
-              />
-            </svg>
+            <img
+              src=" https://res.cloudinary.com/dhadohg2h/image/upload/v1779883749/np_users_1248631_000000_1_wobomv.png"
+              alt="userIcon"
+            />
           }
           label="Users"
           value={totalUsers}
@@ -60,12 +58,10 @@ function DahboardStatusCard() {
         <StatusCard
           iconBg="rgba(87, 24, 255, 0.1)"
           icon={
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path
-                d="M11 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 0114 0H4z"
-                fill="#5718FF"
-              />
-            </svg>
+            <img
+              src=" https://res.cloudinary.com/dhadohg2h/image/upload/v1779884183/np_users_1977590_000000_1_qm5xta.png"
+              alt="activeIcon"
+            />
           }
           label="Active Users"
           value={activeUsers}
@@ -73,12 +69,10 @@ function DahboardStatusCard() {
         <StatusCard
           iconBg="rgba(245, 163, 19, 0.1)"
           icon={
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path
-                d="M2 6a2 2 0 012-2h12a2 2 0 012 2v2H2V6zm0 4h16v6a2 2 0 01-2 2H4a2 2 0 01-2-2v-6z"
-                fill="#F5A313"
-              />
-            </svg>
+            <img
+              src=" https://res.cloudinary.com/dhadohg2h/image/upload/v1779884240/np_loan_1243991_000000_1_aydcht.png"
+              alt="loanIcon"
+            />
           }
           label="Users with Loans"
           value={usersWithLoans}
@@ -86,12 +80,10 @@ function DahboardStatusCard() {
         <StatusCard
           iconBg="rgba(255, 51, 102, 0.1)"
           icon={
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path
-                d="M4 4a2 2 0 00-2 2v10a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h14v2H4V6zm0 4h14v6H4v-6z"
-                fill="#FF3366"
-              />
-            </svg>
+            <img
+              src="https://res.cloudinary.com/dhadohg2h/image/upload/v1779884335/np_money_549109_000000_1_rqiyzq.png"
+              alt="savingIcon"
+            />
           }
           label="Users with Savings"
           value={usersWithSavings}

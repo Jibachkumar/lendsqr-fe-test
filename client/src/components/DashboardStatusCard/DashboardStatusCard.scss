@@ -3,12 +3,11 @@
 .dashboard {
   &__title {
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 500;
     color: $text-primary;
     margin-bottom: 26px;
     line-height: 100%;
     letter-spacing: 0px;
-    font-family: sans-serif;
 
     @include respond-to(tablet) {
       font-size: 18px;
@@ -17,14 +16,18 @@
 
   &__stats {
     display: grid;
-    height: 160px;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     margin-bottom: 40px;
 
-    @include respond-to(tablet) {
+    @include respond-to(desktop) {
       grid-template-columns: repeat(2, 1fr);
-      margin-bottom: 210px;
+      margin-bottom: 15px;
+      gap: 20px;
+    }
+
+    @include respond-to(tablet) {
+      gap: 10px;
     }
   }
 }
@@ -50,7 +53,6 @@
     text-transform: uppercase;
     letter-spacing: 0%;
     line-height: 100%;
-    font-family: sans-serif;
     margin-bottom: 14px;
 
     @include respond-to(tablet) {
@@ -65,7 +67,7 @@
     font-weight: 600;
     line-height: 100%;
     letter-spacing: 0%;
-    font-family: sans-serif;
+    line-height: 100%;
     color: $text-primary;
 
     @include respond-to(tablet) {

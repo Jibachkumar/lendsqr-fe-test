@@ -21,6 +21,7 @@
 
   &__field {
     margin-bottom: 16px;
+    position: relative;
 
     label {
       display: block;
@@ -29,10 +30,17 @@
       color: $text-secondary;
       margin-bottom: 9.5px;
       line-height: 100%;
+      letter-spacing: 0%;
 
       @include respond-to(tablet) {
         font-size: 12px;
       }
+    }
+
+    img {
+      position: absolute;
+      right: 20px;
+      bottom: 12px;
     }
   }
 
@@ -118,9 +126,5 @@
     line-height: 100%;
     letter-spacing: 0%;
     transition: background 0.2s;
-
-    &:hover {
-      background: darken($primary, 5%);
-    }
   }
 }

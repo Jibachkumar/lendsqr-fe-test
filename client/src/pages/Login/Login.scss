@@ -5,9 +5,10 @@
   min-height: 100vh;
   background: $white;
 
+  //  Left panel
   &__left {
     flex: 1;
-    background: $primary-dark;
+
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -52,10 +53,13 @@
     }
   }
 
+  // right panel
   &__right {
     flex: 1;
     @include flex-center;
     flex-direction: column;
+    background: $white;
+    box-shadow: 7px 0 10px rgba(0, 0, 0, 0.3);
 
     @include respond-to(desktop) {
       flex: 1;

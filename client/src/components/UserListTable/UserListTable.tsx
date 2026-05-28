@@ -18,6 +18,7 @@ interface UserListTableProps {
   enableActions?: boolean;
 }
 
+// Table Header
 const COLS = [
   { key: "orgName", label: "Organization" },
   { key: "userName", label: "Username" },
@@ -52,10 +53,10 @@ function UserListTable({
 
   return (
     <div className="table-container">
-      {loading && <p className="empty-stat">Loading....</p>}
       {error && <p className="error-state">{error}</p>}
 
       <div className="users-table-wrap">
+        {/* Dynamic injection slot for filter user */}
         <div>{children}</div>
 
         <table className="users-table">
@@ -84,6 +85,7 @@ function UserListTable({
                 </td>
               </tr>
             ) : (
+              // Core Render Loop
               rows.map((u, i) => (
                 <tr key={i}>
                   <td>{u?.organization || ""}</td>
@@ -107,11 +109,31 @@ function UserListTable({
                       <span>⋮</span>
                     )}
 
+                    {/* Popover Row Context Card Panel Display */}
                     {enableActions && openMenu === i && (
                       <div className="action-card">
-                        <button>View Details</button>
-                        <button>Blacklist User</button>
-                        <button>Active User</button>
+                        <button className="action-card__btn">
+                          {" "}
+                          <img
+                            src="https://res.cloudinary.com/dhadohg2h/image/upload/v1779992821/np_view_1214519_000000_1_wkiovi.png"
+                            alt="eyeIcon"
+                          />{" "}
+                          View Details
+                        </button>
+                        <button className="action-card__btn">
+                          <img
+                            src="https://res.cloudinary.com/dhadohg2h/image/upload/v1779993216/np_delete-friend_3248001_000000_1_wvxy8r.png"
+                            alt=""
+                          />
+                          Blacklist User
+                        </button>
+                        <button className="action-card__btn">
+                          <img
+                            src="https://res.cloudinary.com/dhadohg2h/image/upload/v1779993287/np_user_2995993_000000_1_ii3ezj.png"
+                            alt=""
+                          />
+                          Active User
+                        </button>
                       </div>
                     )}
                   </td>

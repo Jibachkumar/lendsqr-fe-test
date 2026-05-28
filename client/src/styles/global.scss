@@ -5,41 +5,6 @@
 // public/fonts/. On macOS the system already has SF Pro, so it renders natively.
 // On Windows/Linux the fallback chain (-apple-system → Segoe UI → Helvetica Neue)
 // is used, which is the same approach used by Apple's own website.
-@font-face {
-  font-family: "SF Pro Display";
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/SF-Pro-Display-Light.woff2") format("woff2");
-}
-@font-face {
-  font-family: "SF Pro Display";
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/SF-Pro-Display-Regular.woff2") format("woff2");
-}
-@font-face {
-  font-family: "SF Pro Display";
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/SF-Pro-Display-Medium.woff2") format("woff2");
-}
-@font-face {
-  font-family: "SF Pro Display";
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/SF-Pro-Display-Semibold.woff2") format("woff2");
-}
-@font-face {
-  font-family: "SF Pro Display";
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/SF-Pro-Display-Bold.woff2") format("woff2");
-}
 
 // ─── Reset ─────────────────────────────────────────────────
 *,

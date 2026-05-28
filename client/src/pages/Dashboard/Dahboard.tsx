@@ -8,7 +8,7 @@ function Dahboard() {
   const { users, loading, error } = useUsers();
 
   const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(10);
+  const [perPage, setPerPage] = useState(9);
 
   const filtered = users.map((user) => ({
     organization: user.organization,

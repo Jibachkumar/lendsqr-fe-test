@@ -8,6 +8,7 @@ interface HeaderProps {
 function Header({ onMenuToggle }: HeaderProps) {
   return (
     <header className="header">
+      {/* LEFT SECTION: Logo & Global Search */}
       <div className="header__left">
         <Link to="/dashboard" className="header__logo">
           <img
@@ -43,6 +44,7 @@ function Header({ onMenuToggle }: HeaderProps) {
         </div>
       </div>
 
+      {/* RIGHT SECTION: Docs, Notifications, Profiles */}
       <div className="header__right">
         <Link to={"/dashboard"} className="header__docs-link">
           Docs

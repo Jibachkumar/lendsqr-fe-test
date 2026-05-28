@@ -10,14 +10,20 @@
     margin-top: $header-height;
     flex: 1;
     min-width: 0;
-    padding: 60px 60px;
+    padding: 60px 100px 60px 70px;
 
     @include respond-to(desktop) {
+      margin-left: $sidebar-width;
+      padding: 25px 20px;
+    }
+
+    @include respond-to(tablet) {
       margin-left: 0;
+      padding: 25px 20px;
     }
 
     @include respond-to(mobile) {
-      padding: 24px 16px;
+      padding: 24px 8px;
     }
   }
 }

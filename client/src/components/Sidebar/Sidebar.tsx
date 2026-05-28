@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import "./Sidebar.scss";
 
 interface SidebarProps {
@@ -110,6 +110,13 @@ const navSections = [
 ];
 
 function Sidebar({ isOpen, onClose }: SidebarProps) {
+  // 1. Grab the current location object
+  const location = useLocation();
+
+  // 2. Define exactly which route(s) are allowed to see the logout button
+  // For example: Only show it when explicitly on the main "/dashboard" home page
+  const showLogout = location.pathname.includes("/users/");
+
   return (
     <>
       <div
@@ -177,6 +184,20 @@ function Sidebar({ isOpen, onClose }: SidebarProps) {
             )}
           </div>
         ))}
+
+        {showLogout && (
+          <>
+            <div className="sidebar__divider" />
+            <button className="sidebar__nav-item sidebar__logout">
+              <img
+                src="https://res.cloudinary.com/dhadohg2h/image/upload/v1780010660/sign-out_1_ootbeg.png"
+                alt="logoutLogo"
+              />
+              <span>Logout</span>
+            </button>
+            <div className="sidebar__nav-item sidebar__version">v1.2.0</div>
+          </>
+        )}
       </aside>
     </>
   );
