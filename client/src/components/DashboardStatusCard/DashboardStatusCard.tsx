@@ -19,7 +19,7 @@ const StatusCard = ({ icon, iconBg, label, value }: StatusCardProps) => (
 );
 
 function DahboardStatusCard() {
-  const { users, loading, error } = useUsers();
+  const { users, error } = useUsers();
 
   const totalUsers = users.length;
 
@@ -30,10 +30,6 @@ function DahboardStatusCard() {
   ).length;
 
   const usersWithSavings = users.filter((user) => user.accountBalance).length;
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
 
   if (error) {
     return <p>{error}</p>;
