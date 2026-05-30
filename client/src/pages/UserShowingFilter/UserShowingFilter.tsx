@@ -3,15 +3,20 @@ import { useUsers } from "../../hooks/useUser.ts";
 import DahboardStatusCard from "../../components/DashboardStatusCard/DashboardStatusCard";
 import UserListTable from "../../components/UserListTable/UserListTable";
 import Pangiation from "../../components/Pangiation/Pangiation";
+import { useNavigate } from "react-router-dom";
+
 import "./UserShowingFilter.scss";
 
 function UserShowingFilter() {
   const { users, loading, error } = useUsers();
 
+  const navigate = useNavigate();
+
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(9);
 
   const filtered = users.map((user) => ({
+    id: user.id,
     email: user.email,
     phoneNumber: user.phoneNumber,
     dateJoined: user.dateJoined,
@@ -22,8 +27,21 @@ function UserShowingFilter() {
 
   const rows = filtered.slice((page - 1) * perPage, page * perPage);
 
+  const handleRowClick = (id: string) => {
+    users.find((u) => u.id === id);
+    navigate(`/dashboard/users/${id}`);
+  };
+
   return (
     <div>
+      <button className="back" onClick={() => navigate("/")}>
+        <img
+          src="https://res.cloudinary.com/dhadohg2h/image/upload/v1779992256/np_back_3007750_000000_1_ye1zek.png"
+          alt="backLogo"
+        />
+        Back to Home Page
+      </button>
+
       <DahboardStatusCard />
 
       <UserListTable
@@ -31,6 +49,7 @@ function UserShowingFilter() {
         loading={loading}
         error={error}
         enableActions={true}
+        onRowClick={handleRowClick}
       >
         <div className="filter-modal">
           <div className="filter-modal__field">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./UserListTable.scss";
 
 interface UserRow {
+  id: string;
   organization?: string;
   username?: string;
   email: string;
@@ -16,6 +17,7 @@ interface UserListTableProps {
   error: string | null;
   children?: React.ReactNode;
   enableActions?: boolean;
+  onRowClick?: (id: string) => void;
 }
 
 // Table Header
@@ -44,6 +46,7 @@ function UserListTable({
   error,
   children,
   enableActions,
+  onRowClick,
 }: UserListTableProps) {
   const [openMenu, setOpenMenu] = useState<number | null>(null);
 
@@ -89,7 +92,7 @@ function UserListTable({
             ) : (
               // Core Render Loop
               rows.map((u, i) => (
-                <tr key={i}>
+                <tr key={u.id} onClick={() => u?.id && onRowClick?.(u?.id)}>
                   <td>{u?.organization || ""}</td>
                   <td> {u?.username || ""}</td>
                   <td>{u.email} </td>

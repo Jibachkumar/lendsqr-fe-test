@@ -1,10 +1,13 @@
 import { useState } from "react";
 import "./Login.scss";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
     <div className="login-page">
@@ -32,6 +35,13 @@ function Login() {
 
       {/* Right panel */}
       <div className="login-page__right">
+        <button className="back" onClick={() => navigate("/")}>
+          <img
+            src="https://res.cloudinary.com/dhadohg2h/image/upload/v1779992256/np_back_3007750_000000_1_ye1zek.png"
+            alt="backLogo"
+          />
+          Back to Home Page
+        </button>
         <div className="login-page__form-container">
           <h1 className="login-page__welcome">Welcome!</h1>
           <p className="login-page__subtitle">Enter details to login.</p>
