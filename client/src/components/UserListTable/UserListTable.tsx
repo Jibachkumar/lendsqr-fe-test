@@ -107,16 +107,28 @@ function UserListTable({
                   </td>
                   <td
                     className={`action-cell ${openMenu === i ? "active" : ""}`}
+                    onClick={(e) => e.stopPropagation()}
                   >
                     {enableActions ? (
-                      <button onClick={() => handleClick(i)}> ⋮</button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleClick(i);
+                        }}
+                      >
+                        {" "}
+                        ⋮
+                      </button>
                     ) : (
                       <span>⋮</span>
                     )}
 
                     {/* Popover Row Context Card Panel Display */}
                     {enableActions && openMenu === i && (
-                      <div className="action-card">
+                      <div
+                        className="action-card"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <button className="action-card__btn">
                           {" "}
                           <img
