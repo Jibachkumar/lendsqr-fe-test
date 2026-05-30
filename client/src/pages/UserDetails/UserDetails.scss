@@ -288,13 +288,11 @@
   &__section {
     margin-bottom: 36px;
     border-bottom: 1px solid $border-color;
-
-    // Add this to create breathing room between your content and the line
     padding-bottom: 25px;
 
     &:last-child {
       margin-bottom: 0;
-      border-bottom: none; // Optional: removes the line on the very last section
+      border-bottom: none;
       padding-bottom: 0;
     }
 
@@ -356,7 +354,6 @@
       font-weight: 400;
       line-height: 100%;
       letter-spacing: 0px;
-      // color: rgba(33, 63, 125, 0.09);
       text-transform: uppercase;
       letter-spacing: 0.6px;
       font-family: "Work Sans";

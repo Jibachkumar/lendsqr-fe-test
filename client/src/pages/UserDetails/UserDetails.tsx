@@ -23,7 +23,7 @@ const Stars = ({ filled, total = 3 }: { filled: number; total?: number }) => (
   </div>
 );
 
-/* ── tiny helper components ── */
+//  tiny helper components
 const Field = ({ label, value }: { label: string; value?: string | null }) => (
   <div className="user-details__field">
     <label>{label}</label>

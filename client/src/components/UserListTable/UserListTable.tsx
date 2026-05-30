@@ -53,6 +53,8 @@ function UserListTable({
 
   return (
     <div className="table-container">
+      {loading && <p className="error-state">Loading...</p>}
+
       {error && <p className="error-state">{error}</p>}
 
       <div className="users-table-wrap">

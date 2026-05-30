@@ -1,12 +1,4 @@
 @use "base" as *;
-
-// ─── Self-hosted SF Pro Display ────────────────────────────────────────────────
-// Download from https://developer.apple.com/fonts/ and place .woff2 files in
-// public/fonts/. On macOS the system already has SF Pro, so it renders natively.
-// On Windows/Linux the fallback chain (-apple-system → Segoe UI → Helvetica Neue)
-// is used, which is the same approach used by Apple's own website.
-
-// ─── Reset ─────────────────────────────────────────────────
 *,
 *::before,
 *::after {
